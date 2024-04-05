@@ -34,12 +34,18 @@ The movie recommendation system employs the following steps:
 To use the Movie Recommender system:
 
 1. **Install Dependencies:** Ensure that you have all the required dependencies installed. You can install them by running:
+```
+pip install -r requirements.txt
+```
 
-2. **Run the System:** Execute the main script `CineSphere.py` to run the movie recommendation system:
+3. **Run the System:** Execute the main script `CineSphere.py` to run the movie recommendation system:
+```
+streamlit run CineSphere.py
+```
+   
+5. **Input Preferences:** Follow the prompts to input your movie preferences, such as your favourite movie title.
 
-3. **Input Preferences:** Follow the prompts to input your movie preferences, such as your favourite movie title.
-
-4. **Get Recommendations:** Based on your preferences, the system will generate a list of recommended movies for you to explore.
+6. **Get Recommendations:** Based on your preferences, the system will generate a list of recommended movies for you to explore.
 
 ## Features
 
