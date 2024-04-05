@@ -55,6 +55,6 @@ streamlit run CineSphere.py
 - **Word Stemming:** Utilizes NLTK for word stemming to normalize textual data and improve recommendation accuracy.
 
 
-Enjoy discovering new movies with **Movie Recommender**!
+Enjoy discovering new movies with **CineSphere: Movie Recommender**!
 
 *Developed by Dhruvi Vaghela*
