@@ -4,6 +4,7 @@ import pandas as pd
 import requests
 from PIL import Image
 import os
+import re
 
 movie_icon = Image.open('icon.png')
 
@@ -76,8 +77,19 @@ def recommend(movie):
     return recommended_movies, recommended_movies_poster
 
 # Function to download file from Google Drive
+def extract_file_id(url):
+    # Extract the file ID from the Google Drive URL
+    match = re.search(r"/file/d/(\w+)/", url)
+    if match:
+        return match.group(1)
+    else:
+        raise ValueError("Invalid Google Drive URL")
+
 def download_file(url, dest):
-    with requests.get(url) as response:
+    file_id = extract_file_id(url)
+    download_url = f"https://drive.google.com/uc?export=download&id={file_id}"
+    
+    with requests.get(download_url) as response:
         response.raise_for_status()
         with open(dest, 'wb') as f:
             f.write(response.content)
