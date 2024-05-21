@@ -77,7 +77,7 @@ def recommend(movie):
 
 # Function to download file from Google Drive
 def download_file(url, dest):
-    with requests.get(url, streamlit=False) as response:
+    with requests.get(url) as response:
         response.raise_for_status()
         with open(dest, 'wb') as f:
             f.write(response.content)
