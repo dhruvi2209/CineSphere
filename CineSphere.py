@@ -83,7 +83,7 @@ def download_file(url, dest):
             f.write(response.content)
 
 # URL to the file in Google Drive
-FILE_ID = 'https://drive.google.com/file/d/141K395I6qcLj_ixUbvLNTS-XipM6Nk_k/view?usp=drive_link'  # Replace with your actual file ID
+FILE_ID = 'https://drive.google.com/file/d/141K395I6qcLj_ixUbvLNTS-XipM6Nk_k/view?usp=drive_link' 
 FILE_URL = f'https://drive.google.com/uc?export=download&id={FILE_ID}'
 FILE_NAME = 'similarity.pkl'
 
