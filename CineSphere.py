@@ -3,15 +3,14 @@ import pickle
 import pandas as pd
 import requests
 from PIL import Image
+import os
 
 movie_icon = Image.open('icon.png')
 
 st.set_page_config(
     page_title="CineSphere",
     page_icon=movie_icon,
-
 )
-
 
 page_bg = """
 <style>
@@ -50,9 +49,7 @@ border-style: solid;
 </style>
 """
 
-
 st.markdown(page_bg, unsafe_allow_html=True)
-
 
 def fetch_movie_poster(movie_id):
     url = "https://api.themoviedb.org/3/movie/{}?api_key=c32865d4c49c2b065ce3a552a4212b64&language=en-US".format(
@@ -62,7 +59,6 @@ def fetch_movie_poster(movie_id):
     poster_path = data['poster_path']
     full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
     return full_path
-
 
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
@@ -79,14 +75,29 @@ def recommend(movie):
         recommended_movies_poster.append(fetch_movie_poster(movie_id))
     return recommended_movies, recommended_movies_poster
 
+# Function to download file from Google Drive
+def download_file(url, dest):
+    with requests.get(url, streamlit=False) as response:
+        response.raise_for_status()
+        with open(dest, 'wb') as f:
+            f.write(response.content)
+
+# URL to the file in Google Drive
+FILE_ID = 'https://drive.google.com/file/d/141K395I6qcLj_ixUbvLNTS-XipM6Nk_k/view?usp=drive_link'  # Replace with your actual file ID
+FILE_URL = f'https://drive.google.com/uc?export=download&id={FILE_ID}'
+FILE_NAME = 'similarity.pkl'
+
+# Check if the file exists, if not, download it
+if not os.path.exists(FILE_NAME):
+    st.write(f"Downloading {FILE_NAME} from Google Drive...")
+    download_file(FILE_URL, FILE_NAME)
+    st.write(f"{FILE_NAME} downloaded.")
 
 movie_dictionary = pickle.load(open('movies_dictionary.pkl', 'rb'))
 movies = pd.DataFrame(movie_dictionary)
-similarity = pickle.load(open('similarity.pkl', 'rb'))
-
+similarity = pickle.load(open(FILE_NAME, 'rb'))
 
 st.header('CineSphere: Movie Recommender System')
-
 
 selected_movie = st.selectbox(
     'Which movie would you like to see?',
@@ -109,6 +120,7 @@ if st.button('Recommend'):
     with col4:
         st.text(names[3])
         st.image(posters[3])
+
     with col5:
         st.text(names[4])
         st.image(posters[4])
