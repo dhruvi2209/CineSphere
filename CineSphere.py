@@ -76,7 +76,7 @@ def recommend(movie):
         recommended_movies_poster.append(fetch_movie_poster(movie_id))
     return recommended_movies, recommended_movies_poster
 
-# Function to download file from Google Drive
+# Function to extract file ID from Google Drive URL
 def extract_file_id(url):
     # Extract the file ID from the Google Drive URL
     match = re.search(r"/file/d/(\w+)/", url)
@@ -85,6 +85,7 @@ def extract_file_id(url):
     else:
         raise ValueError("Invalid Google Drive URL")
 
+# Function to download file from Google Drive
 def download_file(url, dest):
     file_id = extract_file_id(url)
     download_url = f"https://drive.google.com/uc?export=download&id={file_id}"
@@ -95,8 +96,7 @@ def download_file(url, dest):
             f.write(response.content)
 
 # URL to the file in Google Drive
-FILE_ID = 'https://drive.google.com/file/d/141K395I6qcLj_ixUbvLNTS-XipM6Nk_k/view?usp=drive_link' 
-FILE_URL = f'https://drive.google.com/uc?export=download&id={FILE_ID}'
+FILE_URL = 'https://drive.google.com/file/d/141K395I6qcLj_ixUbvLNTS-XipM6Nk_k/view?usp=sharing' 
 FILE_NAME = 'similarity.pkl'
 
 # Check if the file exists, if not, download it
@@ -122,17 +122,4 @@ if st.button('Recommend'):
     with col1:
         st.text(names[0])
         st.image(posters[0])
-    with col2:
-        st.text(names[1])
-        st.image(posters[1])
-
-    with col3:
-        st.text(names[2])
-        st.image(posters[2])
-    with col4:
-        st.text(names[3])
-        st.image(posters[3])
-
-    with col5:
-        st.text(names[4])
-        st.image(posters[4])
+   
