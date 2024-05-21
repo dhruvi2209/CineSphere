@@ -37,8 +37,12 @@ To use the Movie Recommender system:
 ```
 pip install -r requirements.txt
 ```
+2. **Download similarity.pkl file: ** Please make sure to download this file and place it in the project directory.
+```
+https://drive.google.com/file/d/141K395I6qcLj_ixUbvLNTS-XipM6Nk_k/view?usp=sharing
+```
 
-3. **Run the System:** Execute the main script `CineSphere.py` to run the movie recommendation system:
+4. **Run the System:** Execute the main script `CineSphere.py` to run the movie recommendation system:
 ```
 streamlit run CineSphere.py
 ```
