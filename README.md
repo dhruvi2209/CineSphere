@@ -3,8 +3,6 @@
 
 Welcome to **CineSphere: Movie Recommender**, a Python project implementing a content-based movie recommendation system. This system leverages text vectorization (Bag of Words) and word stemming using NLTK to suggest movies based on user preferences and movie features such as title, genre, plot summary, and cast.
 
-View here: [CineSphere](http://localhost:8501/)
-
 
 ## Overview
 
